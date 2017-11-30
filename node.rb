@@ -282,20 +282,4 @@ module Intp
       end
     end
   end
-
-  begin
-    tree = nil
-    if ARGV[0] then
-      File.open( ARGV[0] ) do |f|
-        tree = Intp::Parser.new.parse( f, ARGV[0] )
-      end
-    else
-      tree = Intp::Parser.new.parse( $stdin, '-' )
-    end
-
-    tree.evaluate
-  rescue Racc::ParseError, IntpError
-    $stderr.puts "#{File.basename $0}: #{$!}"
-    exit 1
-  end
 end
